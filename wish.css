@@ -1,0 +1,254 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #ffffff11, #000000 70%);
+  color: #fff;
+}
+
+/* Center card */
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2; /* card balloons වලට අඩිවිසි වගේ ඉදිරිපස */
+}
+
+/* Birthday card */
+.card {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  padding: 30px 25px 25px;
+  background: rgba(10, 10, 10, 0.9);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow:
+    0 0 20px #ff00ff55,
+    0 0 40px #00eaff33;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Glow border */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #ff00ff, #00eaff, #ff9800, #00ff6a);
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.7;
+  animation: borderGlow 5s linear infinite;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    filter: blur(8px) hue-rotate(0deg);
+  }
+  100% {
+    filter: blur(8px) hue-rotate(360deg);
+  }
+}
+
+/* Headings */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.name {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #ff00ff, #00eaff, #ff9800);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Photo styles */
+.photo-wrapper {
+  margin: 0 auto 15px;
+}
+
+.photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff00ff;
+  box-shadow:
+    0 0 10px #ff00ff88,
+    0 0 18px #ff00ff55;
+  animation: photoGlow 3s ease-in-out infinite;
+}
+
+@keyframes photoGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px #ff00ff88,
+      0 0 18px #ff00ff55;
+  }
+  50% {
+    box-shadow:
+      0 0 14px #00eaffaa,
+      0 0 26px #00eaff77;
+  }
+}
+
+/* Text */
+.text {
+  margin: 6px 0;
+}
+
+.main {
+  font-size: 1rem;
+}
+
+.sub {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.from {
+  margin-top: 18px;
+  font-style: italic;
+  color: #ffb6ff;
+}
+
+/* Button */
+.btn {
+  margin-top: 20px;
+  padding: 9px 26px;
+  border-radius: 999px;
+  border: none;
+  background: #111;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff;
+  transition: 0.25s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 15px #00eaff,
+    0 0 30px #00eaff;
+}
+
+/* 🔥 Floating balloons */
+.balloon {
+  position: absolute;
+  bottom: -25%;
+  width: 60px;
+  height: 80px;
+  border-radius: 50% 50% 50% 50%;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+  opacity: 0.85;
+  animation: floatUp 14s linear infinite;
+  z-index: 1; /* card එකට අටපිට */
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -60px;
+  width: 2px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* වෙන වෙනම balloon 색 + position */
+.b1 {
+  left: 5%;
+  background: radial-gradient(circle at 30% 20%, #ffffff, #ff4b8b);
+  animation-duration: 18s;
+}
+
+.b2 {
+  left: 20%;
+  background: radial-gradient(circle at 30% 20%, #ffffff, #00eaff);
+  animation-duration: 16s;
+  animation-delay: 2s;
+}
+
+.b3 {
+  left: 50%;
+  background: radial-gradient(circle at 30% 20%, #ffffff, #ff9800);
+  animation-duration: 20s;
+  animation-delay: 4s;
+}
+
+.b4 {
+  left: 75%;
+  background: radial-gradient(circle at 30% 20%, #ffffff, #8c5bff);
+  animation-duration: 17s;
+  animation-delay: 1s;
+}
+
+.b5 {
+  left: 90%;
+  background: radial-gradient(circle at 30% 20%, #ffffff, #00ff6a);
+  animation-duration: 19s;
+  animation-delay: 3s;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-60vh) translateX(10px);
+  }
+  100% {
+    transform: translateY(-120vh) translateX(-10px);
+  }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .card {
+    padding: 25px 18px 22px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .name {
+    font-size: 1.2rem;
+  }
+
+  .main {
+    font-size: 0.95rem;
+  }
+
+  .sub {
+    font-size: 0.85rem;
+  }
+}
