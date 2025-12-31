@@ -2,96 +2,117 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Anjana birthday</title>
-    <link rel="stylesheet" href="button.css" />
+    <title>Happy New Year 2026</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- 🔥 అన్ని cake animations background එකේ -->
-    <div class="cakes">
-      <div class="cake cake1">
-        <div class="plate"></div>
-        <div class="layer layer-bottom"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-top"></div>
-        <div class="candle">
-          <div class="flame"></div>
-        </div>
-        <div class="crumb crumb1"></div>
-        <div class="crumb crumb2"></div>
-        <div class="crumb crumb3"></div>
-        <div class="crumb crumb4"></div>
-        <div class="crumb crumb5"></div>
-        <div class="crumb crumb6"></div>
-      </div>
+    <div class="video-wrap">
+      <!-- 🔥 Background fireworks video (manu.mp4) -->
+      <video
+        class="bg-video"
+        src="manu.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+      ></video>
 
-      <div class="cake cake2">
-        <div class="plate"></div>
-        <div class="layer layer-bottom"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-top"></div>
-        <div class="candle">
-          <div class="flame"></div>
-        </div>
-        <div class="crumb crumb1"></div>
-        <div class="crumb crumb2"></div>
-        <div class="crumb crumb3"></div>
-        <div class="crumb crumb4"></div>
-        <div class="crumb crumb5"></div>
-        <div class="crumb crumb6"></div>
-      </div>
+      <!-- Slight dark overlay -->
+      <div class="overlay"></div>
 
-      <div class="cake cake3">
-        <div class="plate"></div>
-        <div class="layer layer-bottom"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-top"></div>
-        <div class="candle">
-          <div class="flame"></div>
-        </div>
-        <div class="crumb crumb1"></div>
-        <div class="crumb crumb2"></div>
-        <div class="crumb crumb3"></div>
-        <div class="crumb crumb4"></div>
-        <div class="crumb crumb5"></div>
-        <div class="crumb crumb6"></div>
-      </div>
+      <!-- Center content -->
+      <div class="center">
+        <h1 class="title">
+          Happy New Year
+          <span class="year">2026</span>
+        </h1>
 
-      <div class="cake cake4">
-        <div class="plate"></div>
-        <div class="layer layer-bottom"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-top"></div>
-        <div class="candle">
-          <div class="flame"></div>
+        <!-- Transparent countdown -->
+        <div id="countdown" class="countdown">
+          <div class="unit">
+            <span id="days">00</span>
+            <small>Days</small>
+          </div>
+          <div class="unit">
+            <span id="hours">00</span>
+            <small>Hours</small>
+          </div>
+          <div class="unit">
+            <span id="minutes">00</span>
+            <small>Minutes</small>
+          </div>
+          <div class="unit">
+            <span id="seconds">00</span>
+            <small>Seconds</small>
+          </div>
         </div>
-        <div class="crumb crumb1"></div>
-        <div class="crumb crumb2"></div>
-        <div class="crumb crumb3"></div>
-        <div class="crumb crumb4"></div>
-        <div class="crumb crumb5"></div>
-        <div class="crumb crumb6"></div>
-      </div>
 
-      <div class="cake cake5">
-        <div class="plate"></div>
-        <div class="layer layer-bottom"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-top"></div>
-        <div class="candle">
-          <div class="flame"></div>
-        </div>
-        <div class="crumb crumb1"></div>
-        <div class="crumb crumb2"></div>
-        <div class="crumb crumb3"></div>
-        <div class="crumb crumb4"></div>
-        <div class="crumb crumb5"></div>
-        <div class="crumb crumb6"></div>
+        <!-- 🔥 Countdown ඉවර උනාම play වෙන video -->
+        <video
+          id="afterVideo"
+          class="after-video hidden"
+          src="manusha.mp4"
+          controls
+          playsinline
+        ></video>
       </div>
     </div>
 
-    <!-- මැදට button එක -->
-    <a class="btn" href="login.html">
-      Happy Birthday
-    </a>
+    <script>
+      // 🎯 Countdown target: 2026 Jan 01, 00:00
+      const targetTime = new Date("2026-01-01T00:00:00").getTime();
+
+      const daysEl = document.getElementById("days");
+      const hoursEl = document.getElementById("hours");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+
+      const countdownBox = document.getElementById("countdown");
+      const afterVideo = document.getElementById("afterVideo");
+
+      function pad(n) {
+        return n < 10 ? "0" + n : n;
+      }
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetTime - now;
+
+        if (diff <= 0) {
+          // Countdown finished
+          daysEl.textContent = "00";
+          hoursEl.textContent = "00";
+          minutesEl.textContent = "00";
+          secondsEl.textContent = "00";
+
+          countdownBox.classList.add("hidden");
+          afterVideo.classList.remove("hidden");
+
+          afterVideo.play().catch(() => {});
+          clearInterval(timer);
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        daysEl.textContent = pad(days);
+        hoursEl.textContent = pad(hours);
+        minutesEl.textContent = pad(minutes);
+        secondsEl.textContent = pad(seconds);
+      }
+
+      updateCountdown();
+      const timer = setInterval(updateCountdown, 1000);
+    </script>
   </body>
 </html>
